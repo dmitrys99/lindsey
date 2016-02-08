@@ -4,6 +4,6 @@
   :components ((:file "package")
 	       (:file "point2d")
 	       (:file "vector2d")
-	       ;;(:file "Polynomial")
+	       (:file "polynomial")
 	       ;;(:file "Intersections")
 	       ))
