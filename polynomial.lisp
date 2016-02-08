@@ -71,3 +71,11 @@
 	       (vector-push (cl:- (cl:* 2 tmp) offset) results)
 	       (vector-push (cl:- (cl:- tmp) offset) results))))
 	results))))
+
+(defmethod getLinearRoot ((p Polynomial))
+  (let ((results (make-array 3 :element-type 'float :fill-pointer 0))
+	(a (elt (coefs p) 1)))
+    (when (cl:/= 0 a)
+      (vector-push (cl:/ (cl:- (elt (coefs p) 0)) a) results))
+    results))
+
