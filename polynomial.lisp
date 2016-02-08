@@ -79,3 +79,18 @@
       (vector-push (cl:/ (cl:- (elt (coefs p) 0)) a) results))
     results))
 
+(defmethod getQuadraticRoots ((p Polynomial))
+  (let ((results (make-array 3 :element-type 'float :fill-pointer 0)))
+    (when (= (degree p) 2)
+      (let* ((a (elt (coefs p) 2))
+	     (b (cl:/ (elt (coefs p) 1) a))
+	     (c (cl:/ (elt (coefs p) 0) a))
+	     (d (cl:- (cl:* b b) (cl:* 4 c))))
+	(cond
+	  ((cl:> d 0)
+	   (let ((e (sqrt d)))
+	     (vector-push (cl:* 0.5 (cl:+ (cl:- b) e)) results)
+	     (vector-push (cl:* 0.5 (cl:- (cl:- b) e)) results)))
+	  ((= d 0)
+	   (vector-push (cl:* 0.5 (cl:- b)) results)))))
+    results))
