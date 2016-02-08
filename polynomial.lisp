@@ -101,3 +101,11 @@
 	    (vector-pop (coefs p))
 	    (return))))
 
+(defmethod getRoots ((p Polynomial))
+  (simplify p)
+  (case (degree p)
+    (0 #())
+    (1 (getLinearRoot p))
+    (2 (getQuadraticRoots p))
+    (3 (getCubicRoots p))
+    (otherwise #())))
