@@ -2,8 +2,8 @@
   ;;:depends-on ()
   :serial t
   :components ((:file "package")
-	       (:file "Point2D")
-	       ;(:file "Vector2D")
-	       ;(:file "Polynomial")
-	       ;(:file "Intersections")
+	       (:file "point2d")
+	       (:file "vector2d")
+	       ;;(:file "Polynomial")
+	       ;;(:file "Intersections")
 	       ))
