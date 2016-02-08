@@ -2,36 +2,12 @@
   (:use #:cl)
 
   (:shadow
-   #:+
-   #:-
-   #:/
-   #:*
-   #:/=
+   #:+ #:- #:/ #:* #:/= #:< #:> #:<= #:>=
 
-   #:<
-   #:>
-   #:<=
-   #:>=
-
-   #:min
-   #:max)
+   #:min #:max #:length)
 
   (:export
-   #:+
-   #:-
-   #:/
-   #:*
-   #:/=
-
-   #:<
-   #:>
-   #:<=
-   #:>=
+   #:+ #:- #:/ #:* #:/= #:< #:> #:<= #:>=
    
-   #:min
-   #:max
-   #:lerp
-   #:clone
-   #:rmoveto
-   #:distance
-   ))
+   #:min #:max #:lerp #:clone #:rmoveto #:distance
+   #:length))
