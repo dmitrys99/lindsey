@@ -94,3 +94,10 @@
 	  ((= d 0)
 	   (vector-push (cl:* 0.5 (cl:- b)) results)))))
     results))
+
+(defmethod simplify ((p Polynomial))
+  (loop for i from (degree p) downto 0
+     do (if (cl:<= (abs (elt (coefs p) i)) TOLERANCE)
+	    (vector-pop (coefs p))
+	    (return))))
+
