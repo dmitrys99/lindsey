@@ -28,8 +28,8 @@
 (defgeneric / (v a))
 (defmethod / ((v Vector2D) scalar)
   (make-instance 'Vector2D
-		 (cl:/ (x v) scalar)
-		 (cl:/ (y v) scalar)))
+		 :x (cl:/ (x v) scalar)
+		 :y (cl:/ (y v) scalar)))
 (defmethod /= ((v Vector2D) scalar)
   (setf (x v) (cl:/ (x v) scalar)
 	(y v) (cl:/ (y v) scalar))
@@ -38,8 +38,8 @@
 (defgeneric * (v a))
 (defmethod * ((v Vector2D) scalar)
   (make-instance 'Vector2D
-		 (cl:* (x v) scalar)
-		 (cl:* (y v) scalar)))
+		 :x (cl:* (x v) scalar)
+		 :y (cl:* (y v) scalar)))
 (defmethod *= ((v Vector2D) scalar)
   (setf (x v) (cl:* (x v) scalar)
 	(y v) (cl:* (y v) scalar))
@@ -48,8 +48,9 @@
 (defgeneric + (v a))
 (defmethod + ((v Vector2D) (a Vector2D))
   (make-instance 'Vector2D
-		 (cl:+ (x v) (x a))
-		 (cl:+ (y v) (y a))))
+		 :x (cl:+ (x v) (x a))
+		 :y (cl:+ (y v) (y a))))
+
 (defmethod += ((v Vector2D) (a Vector2D))
   (setf (x v) (cl:+ (x v) (x a))
 	(y v) (cl:+ (y v) (y a)))
@@ -58,8 +59,8 @@
 (defgeneric - (v a))
 (defmethod - ((v Vector2D) (a Vector2D))
   (make-instance 'Vector2D
-		 (cl:- (x v) (x a))
-		 (cl:- (y v) (y a))))
+		 :x (cl:- (x v) (x a))
+		 :y (cl:- (y v) (y a))))
 (defmethod -= ((v Vector2D) (a Vector2D))
   (setf (x v) (cl:- (x v) (x a))
 	(y v) (cl:- (y v) (y a)))
