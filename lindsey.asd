@@ -5,5 +5,4 @@
 	       (:file "point2d")
 	       (:file "vector2d")
 	       (:file "polynomial")
-	       ;;(:file "Intersections")
-	       ))
+	       (:file "intersection")))
