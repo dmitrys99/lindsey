@@ -1,13 +1,17 @@
 (defpackage #:lindsey
   (:use #:cl)
 
-  (:shadow
-   #:+ #:- #:/ #:* #:/= #:< #:> #:<= #:>=
-
-   #:min #:max #:length)
-
   (:export
-   #:+ #:- #:/ #:* #:/= #:< #:> #:<= #:>=
+
+   #:Point2D
+   #:new-point2d
+   #:point-xy
    
-   #:min #:max #:lerp #:clone #:rmoveto #:distance
-   #:length))
+   #:Vector2D
+   #:new-vector2d
+   #:vector-xy
+
+   #:Polynomial
+
+   #:Intersection
+   #:bezier3-line-intersection))
