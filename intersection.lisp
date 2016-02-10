@@ -2,7 +2,7 @@
 
 (defclass Intersection ()
   ((status :accessor status :initarg :status
-	   :initform "")
+	   :initform :NO-INTERSECTION)
    (points :accessor points :initarg :points
 	   :initform (make-array 4
 				 :element-type 'Point2D
@@ -19,7 +19,7 @@
 				   (a1 Point2D)
 				   (a2 Point2D))
   (let* ((result (make-instance 'Intersection
-				:status "No intersection"))
+				:status :NO-INTERSECTION))
 	 (minimum (minimum a1 a2))
 	 (maximum (maximum a1 a2))
 	 (a (mul p1 -1))
@@ -80,7 +80,7 @@
 			      (y p0))
 			  (<= (y p0)
 			      (y maximum)))
-		 (setf (status result) "Intersection")
+		 (setf (status result) :INTERSECTION)
 		 (appendPoint result p0)))
 
 	      ((= (y a1) (y a2))
@@ -88,18 +88,18 @@
 			      (x p0))
 			  (<= (x p0)
 			      (x maximum)))
-		 (setf (status result) "Intersection")
+		 (setf (status result) :INTERSECTION)
 		 (appendPoint result p0)))
 
 	      (t
 	       (when (and (ge p0 minimum)
 			  (le p0 maximum))
-		 (setf (status result) "Intersection")
+		 (setf (status result) :INTERSECTION)
 		 (appendPoint result p0))))))
     result))
 
 (defun bezier3-line-intersection (p1 p2 p3 p4 a1 a2)
   (let* ((i (make-instance 'Intersection))
 	 (j (intersect-bezier3-line i p1 p2 p3 p4 a1 a2)))
-    (when(string/= (status j) "No intersection")
+    (when (not (eql (status j) :NO-INTERSECTION))
       (points j))))
