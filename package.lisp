@@ -14,4 +14,5 @@
    #:Polynomial
 
    #:Intersection
-   #:bezier3-line-intersection))
+   #:bezier3-line-intersection
+   #:line-line-intersection))
