@@ -18,8 +18,7 @@
 				   (p4 Point2D)
 				   (a1 Point2D)
 				   (a2 Point2D))
-  (let* ((result (make-instance 'Intersection
-				:status :NO-INTERSECTION))
+  (let* ((result (make-instance 'Intersection))
 	 (minimum (minimum a1 a2))
 	 (maximum (maximum a1 a2))
 	 (a (mul p1 -1))
@@ -74,7 +73,6 @@
 
 		 (p0 (lerp p8 p9 tt)))
 	    (cond
-	      
 	      ((= (x a1) (x a2))
 	       (when (and (<= (y minimum)
 			      (y p0))
@@ -101,5 +99,49 @@
 (defun bezier3-line-intersection (p1 p2 p3 p4 a1 a2)
   (let* ((i (make-instance 'Intersection))
 	 (j (intersect-bezier3-line i p1 p2 p3 p4 a1 a2)))
-    (when (not (eql (status j) :NO-INTERSECTION))
-      (points j))))
+    (values (points j)
+	    (status j))))
+
+(defmethod intersect-line-line ((i Intersection)
+				(a1 Point2D)
+				(a2 Point2D)
+				(b1 Point2D)
+				(b2 Point2D))
+  (let* ((result (make-instance 'Intersection))
+
+	 (ua_t (- (* (- (x b2) (x b1))
+		     (- (y a1) (y b1)))
+		  (* (- (y b2) (y b1))
+		     (- (x a1) (x b1)))))
+
+	 (ub_t (- (* (- (x a2) (x a1))
+		     (- (y a1) (y b1)))
+		  (* (- (y a2) (y a1))
+		     (- (x a1) (x b1)))))
+
+	 (u_b  (- (* (- (y b2) (y b1))
+		     (- (x a2) (x a1)))
+		  (* (- (x b2) (x b1))
+		     (- (y a2) (y a1))))))
+    (if (/= 0 u_b)
+	(let ((ua (/ ua_t u_b))
+	      (ub (/ ub_t u_b)))
+	  (when (and (<= 0 ua 1)
+		     (<= 0 ub 1))
+	    (setf (status result) :INTERSECTION)
+	    (vector-push (new-point2d
+			  (+ (x a1) (* ua (- (x a2) (x a1))))
+			  (+ (y a1) (* ua (- (y a2) (y a1)))))
+			 (points result))))
+	(setf (status result)
+	      (if (or (= ua_t 0)
+		      (= ub_t 0))
+		  :COINCIDENT
+		  :PARALLEL)))
+    result))
+
+(defun line-line-intersection (a1 a2 b1 b2)
+  (let* ((i (make-instance 'Intersection))
+	 (j (intersect-line-line i a1 a2 b1 b2)))
+    (values (points j)
+	    (status j))))
