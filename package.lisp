@@ -6,6 +6,8 @@
    #:Point2D
    #:new-point2d
    #:point-xy
+   #:x
+   #:y
    
    #:Vector2D
    #:new-vector2d
