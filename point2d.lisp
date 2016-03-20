@@ -1,9 +1,9 @@
 (in-package #:lindsey)
 
 (defclass Point2D ()
-  "Point2D is an object used to encapsulate a 2-dimensional coordinate."
   ((x :accessor x :initarg :x)
-   (y :accessor y :initarg :y)))
+   (y :accessor y :initarg :y))
+  (:documentation "Point2D is an object used to encapsulate a 2-dimensional coordinate."))
 
 (defun new-point2d (x y)
   "Returns Point2D object for given 2-dimensional coordinates."
@@ -12,7 +12,7 @@
 ;; TODO DRY for similar methods
 
 (defmethod print-object ((p Point2D) stream)
-  "Prints method for Point2D object."
+  "Print method for Point2D object."
   (format stream "Point2D <~A, ~A>" (x p) (y p)))
 
 (defmethod clone ((p Point2D))
